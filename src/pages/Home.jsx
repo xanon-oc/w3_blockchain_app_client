@@ -1,0 +1,46 @@
+import { AppBar, Container, Toolbar, Typography } from "@mui/material";
+
+const Home = () => {
+  return (
+    <div>
+      <AppBar
+        style={{
+          backgroundColor: "#9B1FE9",
+          boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+        }}
+        position="static"
+        color="primary"
+      >
+        <Container maxWidth="xl">
+          <Toolbar disableGutters sx={{ justifyContent: "center" }}>
+            <Typography variant="h6" fontWeight="bold" color="inherit">
+              Notice Here
+            </Typography>
+          </Toolbar>
+        </Container>
+      </AppBar>
+
+      <Container
+        maxWidth="xl"
+        sx={{
+          textAlign: "left",
+          my: 4,
+          mx: "auto",
+          width: "90%",
+          padding: "20px",
+        }}
+      >
+        <Typography fontWeight="bold" color="#9B1FE9" variant="h4" gutterBottom>
+          Request Testnet LINK
+        </Typography>
+        <Typography style={{ width: "58%" }} variant="body1" paragraph>
+          Get testnet LINK for an account on one of the supported blockchain
+          testnets so you can create and test your own oracle and Chainlinked
+          smart contract.
+        </Typography>
+      </Container>
+    </div>
+  );
+};
+
+export default Home;
