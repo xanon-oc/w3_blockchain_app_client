@@ -8,28 +8,25 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { NavLink } from "react-router-dom";
 import BlockChainDropDown from "./BlockChainDropDown";
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+
+const settings = [
+  { id: 1, name: "Login", path: "/login" },
+  { id: 2, name: "Sign Up", path: "/sign_up" },
+  { id: 3, name: "Dashboard", path: "/dashboard" },
+  { id: 4, name: "FAQ", path: "/faq" },
+  { id: 5, name: "Logout", path: "/logout" },
+];
 
 function Header() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -42,10 +39,12 @@ function Header() {
       style={{
         backgroundColor: "white",
         boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+        padding: "5px",
+        borderBottom: "0.5px solid rgba(128, 128, 128, 0.5)",
       }}
     >
       <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{ justifyContent: "center" }}>
+        <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
           <NavLink to="/" style={{ textDecoration: "none" }}>
             <p
               style={{
@@ -65,35 +64,10 @@ function Header() {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleOpenNavMenu}
               color="inherit"
             >
               <MenuIcon />
             </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
@@ -114,21 +88,11 @@ function Header() {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
-          <Box sx={{ display: { xs: "none", md: "flex" }, mr: 6 }}>
-            <BlockChainDropDown />
-          </Box>
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0, display: { md: "flex" }, mr: 6 }}>
+            {" "}
+            <Box sx={{ display: { xs: "none", md: "flex" }, mr: 6 }}>
+              <BlockChainDropDown />
+            </Box>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -151,8 +115,12 @@ function Header() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
+                  <NavLink to={setting.path} style={{ textDecoration: "none" }}>
+                    <Typography textAlign="center" underline="none">
+                      {setting.name}
+                    </Typography>
+                  </NavLink>
                 </MenuItem>
               ))}
             </Menu>

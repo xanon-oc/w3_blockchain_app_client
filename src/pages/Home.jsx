@@ -1,4 +1,5 @@
 import { AppBar, Container, Toolbar, Typography } from "@mui/material";
+import BalanceRequestContainer from "../components/ui/BalanceRequestContainer";
 
 const Home = () => {
   return (
@@ -13,8 +14,9 @@ const Home = () => {
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters sx={{ justifyContent: "center" }}>
-            <Typography variant="h6" fontWeight="bold" color="inherit">
-              Notice Here
+            <Typography variant="h8" fontWeight="bold" color="inherit">
+              Request testnet MATIC and LINK tokens for the Mumbai testnet and
+              test your Chainlinked smart contract.
             </Typography>
           </Toolbar>
         </Container>
@@ -38,6 +40,19 @@ const Home = () => {
           testnets so you can create and test your own oracle and Chainlinked
           smart contract.
         </Typography>
+      </Container>
+
+      <Container
+        maxWidth="xl"
+        sx={{
+          textAlign: "left",
+          my: 4,
+          mx: "auto",
+          width: "90%",
+          padding: "20px",
+        }}
+      >
+        <BalanceRequestContainer />
       </Container>
     </div>
   );

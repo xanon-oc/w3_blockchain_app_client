@@ -4,7 +4,7 @@ import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import ListDivider from "@mui/joy/ListDivider";
 import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
-import BasicModal from "./BasicModal";
+import ConnectWalletModal from "./ConnectWalletModal";
 
 const options = [
   { value: "1", label: "Eric", src: "/static/images/avatar/1.jpg" },
@@ -62,7 +62,7 @@ export default function BlockChainDropDown() {
           </React.Fragment>
         ))}
       </Select>
-      <BasicModal />
+      <ConnectWalletModal />
     </div>
   );
 }
