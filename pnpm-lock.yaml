@@ -20,6 +20,9 @@ dependencies:
   '@mui/material':
     specifier: ^5.15.11
     version: 5.15.11(@emotion/react@11.11.4)(@emotion/styled@11.11.0)(@types/react@18.2.61)(react-dom@18.2.0)(react@18.2.0)
+  '@mui/material-next':
+    specifier: 6.0.0-alpha.124
+    version: 6.0.0-alpha.124(@emotion/react@11.11.4)(@emotion/styled@11.11.0)(@types/react@18.2.61)(react-dom@18.2.0)(react@18.2.0)
   '@mui/styled-engine-sc':
     specifier: 6.0.0-alpha.17
     version: 6.0.0-alpha.17(styled-components@6.1.8)
@@ -29,12 +32,18 @@ dependencies:
   bootstrap:
     specifier: ^5.3.3
     version: 5.3.3(@popperjs/core@2.11.8)
+  jwt-decode:
+    specifier: ^4.0.0
+    version: 4.0.0
   localforage:
     specifier: ^1.10.0
     version: 1.10.0
   match-sorter:
     specifier: ^6.3.4
     version: 6.3.4
+  prop-types:
+    specifier: ^15.8.1
+    version: 15.8.1
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -50,6 +59,9 @@ dependencies:
   react-router-dom:
     specifier: ^6.22.2
     version: 6.22.2(react-dom@18.2.0)(react@18.2.0)
+  redux-persist:
+    specifier: ^6.0.0
+    version: 6.0.0(react@18.2.0)(redux@5.0.1)
   sonner:
     specifier: ^1.4.3
     version: 1.4.3(react-dom@18.2.0)(react@18.2.0)
@@ -840,6 +852,41 @@ packages:
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@mui/material-next@6.0.0-alpha.124(@emotion/react@11.11.4)(@emotion/styled@11.11.0)(@types/react@18.2.61)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-FtMKMScem+O3GvNEDvvr3TYmVhVbeFTYxXXOgcdM6RSqzNCX2ZtyObGojsQsSxaD+y7J0fc2O9LrNZYcQdurxA==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      '@emotion/react': ^11.5.0
+      '@emotion/styled': ^11.3.0
+      '@types/react': ^17.0.0 || ^18.0.0
+      react: ^17.0.0 || ^18.0.0
+      react-dom: ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@emotion/react':
+        optional: true
+      '@emotion/styled':
+        optional: true
+      '@types/react':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.24.0
+      '@emotion/react': 11.11.4(@types/react@18.2.61)(react@18.2.0)
+      '@emotion/styled': 11.11.0(@emotion/react@11.11.4)(@types/react@18.2.61)(react@18.2.0)
+      '@mui/base': 5.0.0-beta.37(@types/react@18.2.61)(react-dom@18.2.0)(react@18.2.0)
+      '@mui/material': 5.15.11(@emotion/react@11.11.4)(@emotion/styled@11.11.0)(@types/react@18.2.61)(react-dom@18.2.0)(react@18.2.0)
+      '@mui/system': 5.15.11(@emotion/react@11.11.4)(@emotion/styled@11.11.0)(@types/react@18.2.61)(react@18.2.0)
+      '@mui/types': 7.2.13(@types/react@18.2.61)
+      '@mui/utils': 5.15.11(@types/react@18.2.61)(react@18.2.0)
+      '@types/react': 18.2.61
+      '@types/react-transition-group': 4.4.10
+      clsx: 2.1.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-is: 18.2.0
+      react-transition-group: 4.4.5(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
   /@mui/material@5.15.11(@emotion/react@11.11.4)(@emotion/styled@11.11.0)(@types/react@18.2.61)(react-dom@18.2.0)(react@18.2.0):
@@ -2387,6 +2434,11 @@ packages:
       object.values: 1.1.7
     dev: true
 
+  /jwt-decode@4.0.0:
+    resolution: {integrity: sha512-+KJGIyHgkGuIq3IEBNftfhW/LfWhXUIY6OmyVWjliu5KH1y0fw7VQ8YndE2O4qZdMSd9SqbnC8GOcZEy0Om7sA==}
+    engines: {node: '>=18'}
+    dev: false
+
   /keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
     dependencies:
@@ -2781,6 +2833,19 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0
+    dev: false
+
+  /redux-persist@6.0.0(react@18.2.0)(redux@5.0.1):
+    resolution: {integrity: sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ==}
+    peerDependencies:
+      react: '>=16'
+      redux: '>4.0.0'
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      redux: 5.0.1
     dev: false
 
   /redux-thunk@3.1.0(redux@5.0.1):

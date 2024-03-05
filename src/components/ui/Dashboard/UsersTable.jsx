@@ -1,42 +1,52 @@
+import PropTypes from "prop-types";
 import Table from "@mui/joy/Table";
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
+import Hidden from "@mui/material/Hidden"; // Import the Hidden component
+import { useGetAllUsersQuery } from "../../../redux/features/auth/authApi";
 
 export default function UsersTable() {
+  const { data: userData, isFetching } = useGetAllUsersQuery();
+  const allUsers = userData?.data;
+
   return (
     <div>
       <Table aria-label="table sizes" size="lg">
         <thead>
           <tr>
-            <th style={{ width: "40%" }}>USERS (100g serving)</th>
-            <th>Calories</th>
-            <th>Fat&nbsp;(g)</th>
-            <th>Carbs&nbsp;(g)</th>
-            <th>Protein&nbsp;(g)</th>
+            <th>Sr</th>
+            <th>Name</th>
+            <Hidden smDown>
+              <th>Email</th>
+            </Hidden>
+            <th>Gender</th>
+            <th>Role</th>
           </tr>
         </thead>
         <tbody>
-          {rows.map((row) => (
-            <tr key={row.name}>
-              <td>{row.name}</td>
-              <td>{row.calories}</td>
-              <td>{row.fat}</td>
-              <td>{row.carbs}</td>
-              <td>{row.protein}</td>
+          {allUsers && allUsers.length > 0 ? (
+            allUsers.map((user, index) => (
+              <tr key={user._id}>
+                <td>{index + 1}</td>
+                <td>{user.name}</td>
+                <Hidden smDown>
+                  <td>{user.email}</td>
+                </Hidden>
+                <td>{user.gender}</td>
+                <td>{user.role}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="7" style={{ textAlign: "center" }}>
+                No Data Found
+              </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </Table>
     </div>
   );
 }
+
+UsersTable.propTypes = {
+  testNetData: PropTypes.arrayOf(PropTypes.object),
+};

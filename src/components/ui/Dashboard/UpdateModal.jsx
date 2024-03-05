@@ -14,8 +14,9 @@ import {
 } from "@mui/material";
 import { toast } from "sonner";
 import { usePostBlockchainMutation } from "../../../redux/features/blockchain/blockchainApi.js";
+import EditNoteIcon from "@mui/icons-material/EditNote";
 
-export default function AddBlockchainModal() {
+export default function UpdateModal() {
   const [open, setOpen] = React.useState(false);
   const [postBlock] = usePostBlockchainMutation();
 
@@ -56,8 +57,9 @@ export default function AddBlockchainModal() {
   return (
     <React.Fragment>
       <Button variant="outlined" color="neutral" onClick={() => setOpen(true)}>
-        Add Blockchain
+        <EditNoteIcon />
       </Button>
+
       <Modal
         aria-labelledby="modal-title"
         aria-describedby="modal-desc"

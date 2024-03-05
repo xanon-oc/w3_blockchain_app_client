@@ -13,17 +13,11 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { NavLink } from "react-router-dom";
 import BlockChainDropDown from "./BlockChainDropDown";
-
-const settings = [
-  { id: 1, name: "Login", path: "/login" },
-  { id: 2, name: "Sign Up", path: "/sign_up" },
-  { id: 3, name: "Dashboard", path: "/dashboard" },
-  { id: 4, name: "FAQ", path: "/faq" },
-  { id: 5, name: "Logout", path: "/logout" },
-];
-
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 function Header() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const { user: currentUser } = useSelector(selectCurrentUser);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -33,14 +27,38 @@ function Header() {
     setAnchorElUser(null);
   };
 
+  let settings = [
+    { id: 3, name: "Dashboard", path: "/dashboard" },
+    { id: 4, name: "FAQ", path: "/faq" },
+  ];
+
+  // Adding Login and Sign Up options only if the user is not logged in
+  if (!currentUser) {
+    settings.unshift({ id: 1, name: "Login", path: "/login" });
+    settings.unshift({ id: 2, name: "Sign Up", path: "/sign_up" });
+  }
+
+  // Modify the settings array based on the user's role
+  if (currentUser) {
+    if (currentUser.role !== "superAdmin") {
+      // Filtering out the Dashboard route if the user is not a superAdmin
+      settings = settings.filter((setting) => setting.name !== "Dashboard");
+    }
+  } else {
+    // Adding Login and Sign Up options only if the user is not logged in
+    settings.unshift({ id: 1, name: "Login", path: "/login" });
+    settings.unshift({ id: 2, name: "Sign Up", path: "/sign_up" });
+  }
+
   return (
     <AppBar
-      position="static"
+      position="fixed"
       style={{
         backgroundColor: "white",
         boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
         padding: "5px",
         borderBottom: "0.5px solid rgba(128, 128, 128, 0.5)",
+        zIndex: 1000, // Ensure the header is above other content
       }}
     >
       <Container maxWidth="xl">
@@ -95,7 +113,9 @@ function Header() {
             </Box>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <div>
+                  <Avatar alt="user" src="/static/images/avatar/2.jpg" />
+                </div>
               </IconButton>
             </Tooltip>
             <Menu

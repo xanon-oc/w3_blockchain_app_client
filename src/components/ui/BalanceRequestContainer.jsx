@@ -2,7 +2,10 @@ import WarningIcon from "@mui/icons-material/Warning";
 import Form from "../form/Form";
 import { Typography } from "@mui/material";
 import RequestHistory from "./RequestHistory";
+import { useSelector } from "react-redux";
+import { useCurrentBlockchain } from "../../redux/features/blockchain/blockchainSlice";
 const BalanceRequestContainer = () => {
+  const { blockchain } = useSelector(useCurrentBlockchain);
   return (
     <div
       style={{
@@ -23,10 +26,19 @@ const BalanceRequestContainer = () => {
           marginBottom: "2rem",
         }}
       >
-        <WarningIcon sx={{ color: "#9B1FE9" }} /> Your wallet is connected to{" "}
-        <span style={{ fontWeight: "bold" }}>Ethereum Kovan</span>, so you are
-        requesting <span style={{ fontWeight: "bold" }}>Ethereum Kovan</span>{" "}
-        Link/ETH.
+        <WarningIcon sx={{ color: "#9B1FE9" }} />{" "}
+        {blockchain.name ? (
+          <>
+            {" "}
+            Your wallet is connected to{" "}
+            <span style={{ fontWeight: "bold" }}>{blockchain.name}</span>, so
+            you are requesting{" "}
+            <span style={{ fontWeight: "bold" }}>{blockchain.name}</span>{" "}
+            Link/ETH.
+          </>
+        ) : (
+          "Please Select A Network"
+        )}
       </Typography>
       <Form />
       <RequestHistory />

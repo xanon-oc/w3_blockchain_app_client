@@ -4,8 +4,22 @@ import Tab, { tabClasses } from "@mui/joy/Tab";
 import TabPanel from "@mui/joy/TabPanel";
 import ETHTable from "./ETHTable";
 import TestLinkTable from "./TestLinkTable";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../redux/features/auth/authSlice";
+import { useGetAllBalanceRequestByUserEmailQuery } from "../../redux/features/balanceRequest/balanceRequestApi";
 
 export default function TabRequest() {
+  const { user: currentUser } = useSelector(selectCurrentUser);
+  const { data: TransactionHistory, isFetching } =
+    useGetAllBalanceRequestByUserEmailQuery(currentUser.email || "");
+
+  const ethData = TransactionHistory?.data.filter(
+    (data) => data.blockchain_id.network === "ETH"
+  );
+  const testNetData = TransactionHistory?.data.filter(
+    (data) => data.blockchain_id.network === "TestNet"
+  );
+
   return (
     <Tabs
       variant="outlined"
@@ -43,10 +57,10 @@ export default function TabRequest() {
         </Tab>
       </TabList>
       <TabPanel value={0}>
-        <ETHTable />
+        <ETHTable ethData={ethData} />
       </TabPanel>
       <TabPanel value={1}>
-        <TestLinkTable />
+        <TestLinkTable testNetData={testNetData} />
       </TabPanel>
     </Tabs>
   );

@@ -2,7 +2,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -13,7 +12,12 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { IconButton } from "@mui/material";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useLoginMutation } from "../redux/features/auth/authApi";
+import { useDispatch } from "react-redux";
+import { toast } from "sonner";
+import { setUser } from "../redux/features/auth/authSlice";
+import { verifyToken } from "../utils/veryfyToken";
 
 const defaultTheme = createTheme();
 
@@ -22,16 +26,34 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const [login] = useLoginMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
+    const toastId = toast.loading("Logging in");
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    console.log({
+    const loginData = {
       email: data.get("email"),
       password: data.get("password"),
-    });
+    };
+
+    try {
+      const res = await login(loginData).unwrap();
+
+      const user = verifyToken(res.data.token);
+      dispatch(setUser({ user: { user: user }, token: res.data.token }));
+      toast.success(`Welcome to dashboard ${user.role}`, {
+        id: toastId,
+      });
+      navigate("/");
+    } catch (error) {
+      toast.error("Something went wrong or user not found", { id: toastId });
+    }
   };
 
   const togglePasswordVisibility = () => {

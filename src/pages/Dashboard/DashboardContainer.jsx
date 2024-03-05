@@ -4,7 +4,6 @@ import DashboardTab from "../../components/ui/DashboardTab";
 const DashboardContainer = () => {
   return (
     <Container style={{ padding: "2rem" }}>
-      {" "}
       <p
         style={{
           color: "#9B1FE9",

@@ -5,6 +5,7 @@ import SignUp from "../pages/SignUp";
 import Home from "../pages/Home";
 import DashboardContainer from "../pages/Dashboard/DashboardContainer";
 import FaqPage from "../pages/FaqPage";
+import SuperAdmin from "./superAdmin";
 
 const router = createBrowserRouter([
   {
@@ -16,22 +17,26 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/sign_up",
-        element: <SignUp />,
-      },
-      {
         path: "/dashboard",
-        element: <DashboardContainer />,
+        element: (
+          <SuperAdmin>
+            <DashboardContainer />
+          </SuperAdmin>
+        ),
       },
       {
         path: "/faq",
         element: <FaqPage />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/sign_up",
+    element: <SignUp />,
   },
 ]);
 

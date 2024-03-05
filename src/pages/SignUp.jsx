@@ -2,7 +2,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -14,7 +13,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { IconButton } from "@mui/material";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useRegisterMutation } from "../redux/features/auth/authApi";
+import { toast } from "sonner";
 
 const defaultTheme = createTheme();
 
@@ -24,11 +25,14 @@ export default function Register() {
     password: "",
     confirmPassword: "",
   });
+  const [registerUser] = useRegisterMutation();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
+    const toastId = toast.loading("Creating user");
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const enteredPassword = data.get("password");
@@ -50,12 +54,29 @@ export default function Register() {
       });
     }
 
-    console.log({
+    const signUpData = {
       name: data.get("fullName"),
       email: data.get("email"),
       gender: data.get("gender"),
       password: enteredPassword,
-    });
+    };
+    try {
+      const result = await registerUser(signUpData);
+      if (result?.data && result?.data.message) {
+        toast.success(result.data.message, { id: toastId });
+        navigate("/login");
+      } else if (
+        result?.error &&
+        result?.error.data &&
+        result?.error.data.errorMessage
+      ) {
+        toast.error(result.error.data.errorMessage, { id: toastId });
+      } else {
+        toast.error("Something went wrong", { id: toastId });
+      }
+    } catch (error) {
+      toast.error("Something went wrong", { id: toastId });
+    }
   };
 
   const togglePasswordVisibility = () => {

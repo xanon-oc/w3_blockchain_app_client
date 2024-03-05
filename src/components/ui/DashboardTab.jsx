@@ -2,8 +2,6 @@ import Tabs from "@mui/joy/Tabs";
 import TabList from "@mui/joy/TabList";
 import Tab, { tabClasses } from "@mui/joy/Tab";
 import TabPanel from "@mui/joy/TabPanel";
-import ETHTable from "./ETHTable";
-import TestLinkTable from "./TestLinkTable";
 import UsersTable from "./Dashboard/UsersTable";
 import BlockchainContainer from "./Dashboard/BlockchainContainer";
 import BalanceRequestContainer from "./Dashboard/BalanceRequestContainer";
