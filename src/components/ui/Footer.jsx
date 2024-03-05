@@ -13,7 +13,7 @@ function Copyright(props) {
       }}
       {...props}
     >
-      {"© copyright 2022 - All Right Reserved by Faucet"}
+      {"© copyright 2024 - All Right Reserved by Faucet"}
     </Typography>
   );
 }

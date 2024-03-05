@@ -38,7 +38,7 @@ export default function Register() {
     const enteredPassword = data.get("password");
     const enteredConfirmPassword = data.get("confirmPassword");
 
-    // Check if passwords match
+    // Checking if passwords match
     if (enteredPassword !== enteredConfirmPassword) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -46,7 +46,7 @@ export default function Register() {
       }));
       return;
     } else {
-      // Clear errors if passwords match
+      // Clearing errors if passwords match
       setErrors({
         email: "",
         password: "",
@@ -84,7 +84,7 @@ export default function Register() {
   };
 
   const validateEmail = (email) => {
-    // Regular expression for email validation
+    // Using regular expression for email validation
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());

@@ -10,8 +10,9 @@ import { useGetAllBalanceRequestByUserEmailQuery } from "../../redux/features/ba
 
 export default function TabRequest() {
   const { user: currentUser } = useSelector(selectCurrentUser);
-  const { data: TransactionHistory, isFetching } =
-    useGetAllBalanceRequestByUserEmailQuery(currentUser.email || "");
+  const { data: TransactionHistory } = useGetAllBalanceRequestByUserEmailQuery(
+    currentUser.email || ""
+  );
 
   const ethData = TransactionHistory?.data.filter(
     (data) => data.blockchain_id.network === "ETH"

@@ -20,7 +20,6 @@ export default function AllBalanceRequest() {
 
   const handleButtonClick = async (rowId) => {
     const toastId = toast.loading("Creating user");
-    console.log(`Button clicked for row with ID ${rowId}`);
 
     try {
       const result = await updateStatus(rowId);

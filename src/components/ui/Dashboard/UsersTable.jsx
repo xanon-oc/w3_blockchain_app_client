@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import Table from "@mui/joy/Table";
-import Hidden from "@mui/material/Hidden"; // Import the Hidden component
+import Hidden from "@mui/material/Hidden";
 import { useGetAllUsersQuery } from "../../../redux/features/auth/authApi";
 
 export default function UsersTable() {
-  const { data: userData, isFetching } = useGetAllUsersQuery();
+  const { data: userData } = useGetAllUsersQuery();
   const allUsers = userData?.data;
 
   return (

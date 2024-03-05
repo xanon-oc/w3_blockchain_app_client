@@ -58,7 +58,7 @@ function Header() {
         boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
         padding: "5px",
         borderBottom: "0.5px solid rgba(128, 128, 128, 0.5)",
-        zIndex: 1000, // Ensure the header is above other content
+        zIndex: 1000,
       }}
     >
       <Container maxWidth="xl">

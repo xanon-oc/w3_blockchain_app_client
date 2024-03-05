@@ -12,7 +12,6 @@ import { useSelector } from "react-redux";
 import { useCurrentBlockchain } from "../../redux/features/blockchain/blockchainSlice";
 import { toast } from "sonner";
 import { selectCurrentUser } from "../../redux/features/auth/authSlice";
-import { usePostBlockchainMutation } from "../../redux/features/blockchain/blockchainApi";
 import { useAddBalanceRequestMutation } from "../../redux/features/balanceRequest/balanceRequestApi";
 
 const Form = () => {
@@ -41,7 +40,6 @@ const Form = () => {
     try {
       const res = await postRequest(requestFormValue).unwrap();
 
-      console.log(res);
       toast.success(res.message, { id: toastId });
     } catch (error) {
       toast.error(error.data.errorMessage, { id: toastId });

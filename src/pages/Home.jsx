@@ -1,7 +1,5 @@
 import { AppBar, Container, Toolbar, Typography } from "@mui/material";
 import BalanceRequestContainer from "../components/ui/BalanceRequestContainer";
-import { useSelector } from "react-redux";
-import { useCurrentBlockchain } from "../redux/features/blockchain/blockchainSlice";
 
 const Home = () => {
   return (
